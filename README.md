@@ -24,3 +24,24 @@ par cette chaîne de caractères le bon "RequestHandler" à appeler.
 
 Une autre sorte de router pourrait utiliser un fichier de configuration
 indiquant les url permises et le RequestHandler correspondant.
+
+### 2. Parser
+
+Utilisez le patron de conception _State_ pour complémenter l'interpréteur de
+requêtes HTTP.
+
+Actuellement, le parser n'interprête que la première ligne des requêtes HTTP
+reçues par le système. Une requête HTTP est définie selon le [standard RF2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html).
+
+        Request       = Request-Line
+                        *(( general-header
+                         | request-header
+                         | entity-header ) CRLF)
+                        CRLF
+                        [ message-body ]
+
+Vous devez écrire un interpréteur de requête HTTP qui capture:
+
+- Les informations de la première ligne (_Request-Line_)
+- S'ils sont présents, tous les _headers_
+- S'il est présent, le corps de la requête (_message-body_)
